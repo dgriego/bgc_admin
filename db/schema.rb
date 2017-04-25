@@ -10,10 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170425183245) do
+ActiveRecord::Schema.define(version: 20170425220650) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "child_trips", force: :cascade do |t|
+    t.integer "trip_id"
+    t.integer "child_id"
+    t.boolean "primary",  default: true
+  end
 
   create_table "children", force: :cascade do |t|
     t.string   "first_name"
@@ -36,6 +42,17 @@ ActiveRecord::Schema.define(version: 20170425183245) do
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "trips", force: :cascade do |t|
+    t.string  "title"
+    t.string  "location"
+    t.integer "seats"
+    t.integer "alt_seats"
+    t.date    "start_date"
+    t.time    "start_time"
+    t.time    "end_time"
+    t.boolean "published",  default: false
   end
 
   create_table "users", force: :cascade do |t|
