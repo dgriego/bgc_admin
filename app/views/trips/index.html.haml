@@ -1,0 +1,8 @@
+%div.container
+  %div.card
+    %div.card-block
+      Trips
+      - @trips.each do |trip|
+        %div.ml-2
+          Title:
+          = trip.title
