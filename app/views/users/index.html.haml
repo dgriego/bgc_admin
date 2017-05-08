@@ -1,0 +1,39 @@
+- if @errors
+  %div
+    = @errors
+
+%div.card
+  %div.card-block
+    %h4.card-title
+      Guardians
+    %table.table
+      %thead.thead-inverse
+        %tr
+          %th Username
+          %th Email
+          %th Phone
+          %th Active Participants
+      %tbody
+        - @guardians.order(:last_name).each do |guardian|
+          %tr
+            %td
+              = guardian.username
+            %td
+              = guardian.email
+            %td
+              = guardian.phone
+            %td.text-center
+              = guardian.active_participants
+
+    = form_for(:user,
+               url: import_users_path,
+               html: {mulitpart: true}) do |f|
+      %div.form-group
+        = f.file_field :file, required: true, class: 'form-control-file'
+      = f.submit('Import', class: 'btn btn-secondary')
+
+    = form_for(:user,
+               url: destroy_all_guardians_users_path,
+               method: :delete,
+               data: {confirm: 'Are you sure?'}) do |f|
+      = f.submit('Delete all', class: 'btn btn-primary')
