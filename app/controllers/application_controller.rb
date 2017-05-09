@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
   # helper_method :current_user, :logged_in?
   #
   # def current_user
+  #   binding.pry
   #   @current_user ||= User.find(session[:user_id]) if session[:user_id]
   # end
   #
@@ -11,7 +12,8 @@ class ApplicationController < ActionController::Base
   #   !!current_user
   # end
   #
-  # def require_user
+  # def require_admin
+  #   binding.pry
   #   unless current_user
   #     flash[:error] = 'Must be logged in to do that.'
   #     redirect_to root_path

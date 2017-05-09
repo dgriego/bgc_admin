@@ -10,25 +10,31 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170508012155) do
+ActiveRecord::Schema.define(version: 20170509192726) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "child_trips", force: :cascade do |t|
+  create_table "participant_trips", force: :cascade do |t|
     t.integer "trip_id"
-    t.integer "child_id"
-    t.boolean "primary",  default: true
+    t.boolean "primary",        default: true
+    t.integer "participant_id"
+    t.index ["participant_id"], name: "index_participant_trips_on_participant_id", using: :btree
   end
 
-  create_table "children", force: :cascade do |t|
+  create_table "participant_users", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "participant_id"
+    t.index ["participant_id"], name: "index_participant_users_on_participant_id", using: :btree
+    t.index ["user_id"], name: "index_participant_users_on_user_id", using: :btree
+  end
+
+  create_table "participants", force: :cascade do |t|
     t.string   "first_name"
     t.integer  "age"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string   "last_name"
-    t.integer  "user_id"
-    t.index ["user_id"], name: "index_children_on_user_id", using: :btree
   end
 
   create_table "trips", force: :cascade do |t|
@@ -64,9 +70,10 @@ ActiveRecord::Schema.define(version: 20170508012155) do
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
     t.string   "unconfirmed_email"
+    t.boolean  "active",                 default: true
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
 
-  add_foreign_key "children", "users"
+  add_foreign_key "participant_trips", "participants", on_delete: :cascade
 end

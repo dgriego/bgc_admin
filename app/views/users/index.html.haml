@@ -9,7 +9,7 @@
     %table.table
       %thead.thead-inverse
         %tr
-          %th Username
+          %th Name
           %th Email
           %th Phone
           %th Active Participants
@@ -17,7 +17,7 @@
         - @guardians.order(:last_name).each do |guardian|
           %tr
             %td
-              = guardian.username
+              = guardian.fullname
             %td
               = guardian.email
             %td

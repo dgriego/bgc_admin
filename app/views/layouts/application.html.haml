@@ -9,5 +9,19 @@
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
   %body
     %div.container
+      - if user_signed_in?
+        Logged in as
+        %strong= current_user.email
+        = link_to 'Edit profile |', edit_user_registration_path
+        = link_to 'Logout |', destroy_user_session_path, method: :delete
+        = link_to 'Trips', trips_path
+
+        - if current_user.admin?
+          = link_to ' | Guardians', users_path
+      - else
+        = link_to 'Register |', new_user_registration_path
+        = link_to 'Log in', new_user_session_path
+
       = render 'layouts/messages'
+
       = yield

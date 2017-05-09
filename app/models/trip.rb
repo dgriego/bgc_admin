@@ -1,6 +1,6 @@
 class Trip < ApplicationRecord
-  has_many :child_trips
-  has_many :children, through: :child_trips
+  has_many :participants
+  has_many :participants, through: :participant_trips
 
   validates :title, presence: true
   validates :location, presence: true

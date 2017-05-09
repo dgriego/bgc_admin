@@ -1,4 +1,13 @@
 class UsersController < ApplicationController
+  before_action Participant.disassociate_guardians, only: :destroy_all_guardians
+
+  before_filter do
+    unless current_user && current_user.admin?
+      redirect_to root_path,
+                  {flash: {error: 'You do not have permission to do that.'}}
+    end
+  end
+
   def index # GET '/users'
     @guardians = User.where(admin: false)
   end
