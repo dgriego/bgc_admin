@@ -18,6 +18,7 @@
 
         - if current_user.admin?
           = link_to ' | Guardians', users_path
+          = link_to ' | Create Trip', new_trip_path
       - else
         = link_to 'Register |', new_user_registration_path
         = link_to 'Log in', new_user_session_path

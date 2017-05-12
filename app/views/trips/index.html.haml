@@ -1,8 +1,28 @@
-%div.container
-  %div.card
-    %div.card-block
+%div.card
+  %div.card-block
+    %div.card-title
       Trips
-      - @trips.each do |trip|
-        %div.ml-2
-          Title:
-          = trip.title
+    %table.table
+      %thead.thead-inverse
+        %tr
+          %th
+          %th
+          %th Title
+          %th Start Date
+          %th Start Time
+          %th End Time
+          %th Seats
+          %th Alt Seats
+          %th Published
+      %tbody
+        - @trips.each do |trip|
+          %tr
+            %td= link_to icon('pencil'), trip_path(trip)
+            %td= link_to icon('trash-o'), trip_path(trip), method: :delete
+            %td= trip.title
+            %td= trip.start_date
+            %td= trip.start_time
+            %td= trip.end_time
+            %td.text-center= trip.seats
+            %td.text-center= trip.alt_seats
+            %td.text-center= trip.published? ? 'yes' : 'no'

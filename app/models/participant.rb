@@ -1,5 +1,17 @@
-class Participant < ApplicationRecord
-  has_many :particiant_trips
+# == Schema Information
+#
+# Table name: participants
+#
+#  id         :integer          not null, primary key
+#  first_name :string
+#  age        :integer
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#  last_name  :string
+#
+
+class Participant < ActiveRecord::Base
+  has_many :participant_trips
   has_many :trips, through: :participant_trips
 
   has_many :participant_users
@@ -7,13 +19,6 @@ class Participant < ApplicationRecord
 
   validates :first_name, presence: true
   validates :last_name, presence: true
-
-  def self.disassociate_guardians
-    Participant.all.each do |participant|
-      participant.user_id = nil
-      participant.save!
-    end
-  end
 
   def primary_trips
     ParticipantTrip.where("participant_id = ? AND participant_trips.primary = ?", self.id, true)

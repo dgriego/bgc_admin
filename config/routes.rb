@@ -11,6 +11,6 @@ Rails.application.routes.draw do
       collection { delete :destroy_all_guardians }
     end
 
-    resources :trips, only: [:index, :show]
+    resources :trips
   end
 end
