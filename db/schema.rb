@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170509192726) do
+ActiveRecord::Schema.define(version: 20170513013727) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,6 +19,7 @@ ActiveRecord::Schema.define(version: 20170509192726) do
     t.integer "trip_id"
     t.boolean "primary",        default: true
     t.integer "participant_id"
+    t.boolean "alternate",      default: false
     t.index ["participant_id"], name: "index_participant_trips_on_participant_id", using: :btree
   end
 
