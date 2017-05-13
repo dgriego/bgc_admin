@@ -1,1 +1,18 @@
-HELLO
+.card
+  .card-header
+    Trip Info
+    %span
+      |
+      seats:
+      = @trip.seats
+      \\
+      = @trip.seats_left
+    %span
+      |
+      alternate seats:
+      = @trip.alt_seats
+    %div
+      = link_to 'edit', edit_trip_path(@trip)
+  .card-block
+    %h4.card-title= @trip.title
+    %h6.card-subtitle.text-muted= @trip.start_date

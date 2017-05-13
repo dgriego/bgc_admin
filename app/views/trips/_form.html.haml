@@ -1,0 +1,38 @@
+.card
+  .card-header
+    = @trip.new_record? ? 'New Trip' : 'Update Trip'
+  .card-block
+    = form_for @trip do |f|
+      - if @trip.errors.any?
+        = render '/shared/errors', errors: @trip.errors
+      .form-group
+        = f.label :title
+        = f.text_field :title, class: "form-control"
+
+      .form-group
+        = f.label :seats
+        = f.select :seats, Trip.max_seats, {}, {class: 'form-control'}
+
+      .form-group
+        = f.label :alt_seats, 'Alternate Seats'
+        = f.select :alt_seats, Trip.max_alt_seats, {}, {class: 'form-control'}
+
+      .form-group
+        = f.label :start_date
+        = f.date_field :start_date, class: 'form-control', value: Date.today
+
+      .form-group
+        = f.label :start_time
+        = f.time_field :start_time, class: 'form-control'
+
+      .form-group
+        = f.label :end_time
+        = f.time_field :end_time, class: 'form-control'
+
+      .form-check
+        = f.label :published, class: 'form-check-label' do
+          = f.check_box :published, class: 'form-check-input'
+          publish
+
+      - button_text = @trip.new_record? ? 'Create' : 'Update'
+      = f.submit button_text, class: 'btn btn-primary'

@@ -20,6 +20,10 @@ class Participant < ActiveRecord::Base
   validates :first_name, presence: true
   validates :last_name, presence: true
 
+  def guardian
+    self.users.first
+  end
+
   def primary_trips
     ParticipantTrip.where("participant_id = ? AND participant_trips.primary = ?", self.id, true)
   end

@@ -33,7 +33,7 @@ class TripsController < ApplicationController
 
     if @trip.update(trip_params)
       flash[:notice] = "#{trip_params[:title]} has been updated"
-      redirect_to trip_path(@trip)
+      redirect_to trips_path
     else
       render :edit
     end
@@ -41,6 +41,7 @@ class TripsController < ApplicationController
 
   def destroy
     trip = Trip.find(params[:id])
+    trip.participants.each { |participant| participant.destroy }
     trip.destroy
     flash[:notice] = "#{trip.title} was removed."
     redirect_to trips_path

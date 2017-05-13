@@ -37,7 +37,7 @@ class Trip < ActiveRecord::Base
     (1..MAX_ALT_SEATS).to_a
   end
 
-  def seats_taken
+  def seats_left
     self.seats - self.participants.count
   end
 end
