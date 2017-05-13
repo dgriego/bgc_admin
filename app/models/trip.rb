@@ -40,4 +40,7 @@ class Trip < ActiveRecord::Base
   def seats_left
     self.seats - self.participants.count
   end
+
+  def alternate_seats_left
+  end
 end

@@ -24,11 +24,11 @@ class Participant < ActiveRecord::Base
     self.users.first
   end
 
-  def primary_trips
-    ParticipantTrip.where("participant_id = ? AND participant_trips.primary = ?", self.id, true)
+  def primary_trip
+    participant_trips.where(primary: true).collect { |t| t.trip }.first
   end
 
-  def alternate_trips
-    ParticipantTrip.where('participant_id = ? AND participant_trips.primary = ?', self.id, false)
+  def alternate_trip
+    participant_trips.where(primary: false).collect { |t| t.trip }.first
   end
 end
