@@ -1,0 +1,36 @@
+- if @errors
+  %div
+    = @errors
+
+%div.card
+  %div.card-block
+    %h4.card-title
+      Participants
+    %table.table
+      %thead.thead-inverse
+        %tr
+          %th Participant Number
+          %th Name
+          %th.text-center age
+      %tbody
+        - @participants.order(:first_name).each do |participant|
+          %tr
+            %td
+              = participant.member_number
+            %td
+              = participant.fullname
+            %td.text-center
+              = participant.age
+
+    = form_for(:participant,
+               url: import_participants_path,
+               html: {mulitpart: true}) do |f|
+      %div.form-group
+        = f.file_field :file, required: true, class: 'form-control-file'
+      = f.submit('Import', class: 'btn btn-secondary')
+
+    = form_for(:participant,
+               url: destroy_all_participants_path,
+               method: :delete,
+               data: {confirm: 'Are you sure?'}) do |f|
+      = f.submit('Delete all', class: 'btn btn-primary')

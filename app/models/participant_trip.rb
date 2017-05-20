@@ -6,6 +6,7 @@
 #  trip_id        :integer
 #  primary        :boolean          default("true")
 #  participant_id :integer
+#  alternate      :boolean          default("false")
 #
 
 class ParticipantTrip < ActiveRecord::Base
