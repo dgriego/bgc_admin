@@ -38,9 +38,12 @@ class Trip < ActiveRecord::Base
   end
 
   def seats_left
-    self.seats - self.participants.count
+    count = participant_trips.where(primary: true).count
+    seats - count
   end
 
-  def alternate_seats_left
+  def alt_seats_left
+    count = participant_trips.where(primary: false).count
+    alt_seats - count
   end
 end

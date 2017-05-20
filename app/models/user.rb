@@ -30,8 +30,8 @@
 class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
+  devise :database_authenticatable, :recoverable, :registerable,
+         :rememberable, :trackable, :validatable
 
   REQUIRED_COLUMN_HEADERS_FOR_IMPORT = ['HeadOfHousehold',
                                         'EmailAddress',
@@ -72,7 +72,10 @@ class User < ActiveRecord::Base
         user.phone = row['PhoneNumber'].to_s.gsub(/[-()  ext.]/, '')
         user.active_participants = row['ActiveParticipants']
         begin
-          RegistrationMailer.welcome(user, user.password).deliver if user.save!
+          if user.save!
+            Devise::Mailer.reset_password_instructions(user, user.password)
+                          .deliver!
+          end
         rescue
           next
         end

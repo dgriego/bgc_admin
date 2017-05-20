@@ -21,14 +21,14 @@ class Participant < ActiveRecord::Base
   validates :last_name, presence: true
 
   def guardian
-    self.users.first
+    users.first
   end
 
   def primary_trip
-    participant_trips.where(primary: true).collect { |t| t.trip }.first
+    participant_trips.where(primary: true).collect(&:trip).first
   end
 
   def alternate_trip
-    participant_trips.where(primary: false).collect { |t| t.trip }.first
+    participant_trips.where(primary: false).collect(&:trip).first
   end
 end

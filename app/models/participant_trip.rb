@@ -14,4 +14,6 @@ class ParticipantTrip < ActiveRecord::Base
 
   validates :participant_id, presence: true
   validates :trip_id, presence: true
+
+  validates_uniqueness_of :participant_id, scope: :trip_id
 end

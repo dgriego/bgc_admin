@@ -16,3 +16,6 @@
   .card-block
     %h4.card-title= @trip.title
     %h6.card-subtitle.text-muted= @trip.start_date
+
+    - @trip.participants.each do |kid|
+      %div= kid.first_name
