@@ -21,10 +21,12 @@ class Participant < ActiveRecord::Base
   validates :first_name, presence: true
   validates :last_name, presence: true
 
-  REQUIRED_COLUMN_HEADERS_FOR_IMPORT = ['FirstName',
-                                        'LastName',
-                                        'ParticipantNumber',
-                                        'BirthDate']
+  REQUIRED_COLUMN_HEADERS_FOR_IMPORT = [
+    'FirstName',
+    'LastName',
+    'ParticipantNumber',
+    'BirthDate'
+  ]
 
   def self.import(file)
     spreadsheet = open_spreadsheet(file)

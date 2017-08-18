@@ -33,10 +33,12 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :recoverable, :registerable,
          :rememberable, :trackable, :validatable
 
-  REQUIRED_COLUMN_HEADERS_FOR_IMPORT = ['HeadOfHousehold',
-                                        'EmailAddress',
-                                        'PhoneNumber',
-                                        'ActiveParticipants']
+  REQUIRED_COLUMN_HEADERS_FOR_IMPORT = [
+    'HeadOfHousehold',
+    'EmailAddress',
+    'PhoneNumber',
+    'ActiveParticipants'
+  ]
 
   has_many :participant_users
   has_many :participants, through: :participant_users
